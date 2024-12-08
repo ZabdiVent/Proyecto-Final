@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_final/fragments/favorite.dart';
 import 'package:proyecto_final/models/favmodel.dart';
 import 'package:proyecto_final/models/modelo.dart';
 
