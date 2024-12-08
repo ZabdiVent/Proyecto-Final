@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/fragments/productos_vista.dart';
+import 'package:proyecto_final/fragments/profile.dart';
+import 'package:proyecto_final/models/user.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -13,11 +16,19 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _busquedaControl = TextEditingController(); 
 
   // Lista de pantallas que se mostrarán según el índice
-  final List<Widget> _screens = [
-    const Center(child: Text('Pantalla de Inicio', style: TextStyle(fontSize: 24))),
-    const Center(child: Text('Pantalla de Carrito de compras', style: TextStyle(fontSize: 24))),
-    const Center(child: Text('Pantalla de Historial de compras', style: TextStyle(fontSize: 24))),
-  ];
+  late List<Widget> _screens; 
+  @override 
+  void didChangeDependencies() { 
+    super.didChangeDependencies(); 
+    final User user = ModalRoute.of(context)!.settings.arguments as User; 
+    _screens = [ 
+      ProductosVista(), 
+      const Center(child: Text('Pantalla de Carrito de compras', style: TextStyle(fontSize: 24))), 
+      const Center(child: Text('Pantalla de Historial de compras', style: TextStyle(fontSize: 24))), 
+      ProfilePage(user: user), 
+      ];
+    }
+
   void _onItemTapped(int index) {
     setState(() {
       _indiceNavigator = index;  
@@ -57,11 +68,20 @@ class _MyHomePageState extends State<MyHomePage> {
               });
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.heart_broken),
+            onPressed: () {
+              setState(() {
+                
+              });
+            },
+          ),
+          
         ],
       ),
       body: _screens[_indiceNavigator],  // Muestra la pantalla correspondiente según el índice seleccionado
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.white,
+        selectedItemColor: Colors.blueGrey,
         unselectedItemColor: Colors.blue,
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         currentIndex: _indiceNavigator,  // El índice de la pestaña seleccionada
@@ -79,6 +99,11 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.history),
             label: 'Historial',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.supervised_user_circle_sharp),
+            label: 'Perfil',
+
+          )
         ],
       ),
     );

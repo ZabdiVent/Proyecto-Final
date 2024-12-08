@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_final/Pages/home.dart'; 
+import 'package:proyecto_final/Pages/home.dart';
+import 'package:proyecto_final/Pages/login.dart';
+import 'package:proyecto_final/Pages/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +18,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),  // Llamamos al widget de MyHomePage desde home.dart
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginPage(),
+        '/home': (context) => const MyHomePage(),
+        '/register': (context) => RegisterPage()
+      },  
     );
   }
 }
