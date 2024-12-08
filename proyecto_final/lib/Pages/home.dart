@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/fragments/favorite.dart';
+import 'package:proyecto_final/fragments/productopage.dart';
 import 'package:proyecto_final/fragments/productos_vista.dart';
 import 'package:proyecto_final/fragments/profile.dart';
+import 'package:proyecto_final/models/favmodel.dart';
 import 'package:proyecto_final/models/user.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -69,11 +72,11 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.heart_broken),
-            onPressed: () {
-              setState(() {
-                
-              });
+            icon: const Icon(Icons.favorite),
+            onPressed: (){
+              Navigator.push(
+                context, MaterialPageRoute(
+                  builder: (context) => FavoritosPage(favoritos: Favoritos.favoritos)));
             },
           ),
           

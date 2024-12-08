@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/fragments/productopage.dart';
 import 'package:proyecto_final/models/modelo.dart';
 import 'package:proyecto_final/provider/productos.dart';
 
@@ -42,13 +43,21 @@ class ProductosVista extends StatelessWidget {
                 itemBuilder: (context, index){
                   final Producto producto = snapshot.data![index];
 
-                  return Card(
-                    elevation: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Image.network(
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context, MaterialPageRoute(
+                          builder: (context) => ProductoPage(producto: producto),
+                          ),
+                        );
+                    },
+                    child: Card(
+                      elevation: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                           child: Image.network(
                             producto.image,
                             width: double.infinity,
                             fit: BoxFit.cover,
@@ -66,8 +75,9 @@ class ProductosVista extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(producto.category),)
-                      ],
-                    ),
+                        ],
+                      ),
+                    )
                   );
                 }
             );
